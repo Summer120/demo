@@ -1,0 +1,60 @@
+
+
+ 	<div class="right">
+         <!--标题，控制标题-->
+		<div class="right_top" id="top_topic" > 
+            <table >
+			 <thead >
+                <tr>
+                    <th >序号</th>
+                    <th *ngFor="let item of title" >{{item}}</th>
+                    <th>操作</th>
+
+                    
+                </tr>
+            </thead>
+        </table>
+	</div> 
+
+    <!--表格内容 scroll滚动条滚动事件-->
+    <div class="right_content" id="content" (scroll)="getScollerWidth()"> 
+<table>
+   
+   <tbody > 
+       <tr *ngFor="let item of viewData;let i = index" >
+           <!--生成序号列-->
+           <td>{{i+1}}</td>
+     <td *ngFor="let it of arr ;let j = index" >
+         <!--用来进行双击编辑的判断-->
+        <input style="width:50%" #input *ngIf=" type[i][j] == 'false'"  value={{item[it]}} (keyup.enter)="update(input.value,i,j)"/>
+        <span   *ngIf="type[i][j] == 'true'" (dblclick)="edit(i,j)">{{item[it]}}</span>
+    </td>     
+  
+    <td font-size="2px">
+       <button class="btn btn-success " style="width:auto;"  (click)="edit(i,j)">编辑</button>
+        <button class="btn btn-danger " style="width:auto;">删除</button>
+   </td>
+   
+    </tr>
+    </tbody>
+</table>
+    </div>
+    <div class="box" >
+        <!--通过ModelChange完成双向数据绑定-->
+    <select [ngModel]="pageSize" style="width:40px;height:35px"    (ngModelChange)=" pageSize=$event;changePageSize()" >
+        <option *ngFor="let item of sizeList" >{{item}}</option>  
+    </select>
+   <!--引用bootstrap分页工具条插件-->
+<ngb-pagination  [collectionSize]="totalPages" [ellipses]="false" [maxSize]="5" (pageChange)="changePage($event)" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+    
+    <span id="total" style="width:220px">从<i> {{(page-1)*pageSize+1}} </i>到<i> {{page*pageSize < total ? page*pageSize :total}} </i>条,总共<i>{{total}}条</i></span>
+
+</div>
+
+
+
+
+
+
+
+

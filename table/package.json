@@ -1,0 +1,15 @@
+{
+  "name": "itoo-module",
+  "version": "1.0.6",
+  "description": "module of itoo ",
+  "main": "index.js",
+  "typings":"./lib/service.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "itoo"
+  ],
+  "author": "ledary",
+  "license": "ISC"
+}
